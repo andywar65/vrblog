@@ -1,6 +1,7 @@
+from django import forms
 from django.db import models
 
-from modelcluster.fields import ParentalKey
+from modelcluster.fields import ParentalKey, ParentalManyToManyField
 from modelcluster.contrib.taggit import ClusterTaggableManager
 from taggit.models import TaggedItemBase
 
@@ -9,6 +10,7 @@ from wagtail.wagtailcore.fields import RichTextField
 from wagtail.wagtailadmin.edit_handlers import FieldPanel, InlinePanel, MultiFieldPanel
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsearch import index
+from wagtail.wagtailsnippets.models import register_snippet
 
 class VrblogIndexPage(Page):
     intro = RichTextField(blank=True)
@@ -32,6 +34,7 @@ class VrblogPage(Page):
     intro = models.CharField(max_length=250)
     body = RichTextField(blank=True)
     tags = ClusterTaggableManager(through=VrblogPageTag, blank=True)
+    categories = ParentalManyToManyField('vrblog.VrblogCategory', blank=True)
 
     def main_image(self):
         gallery_item = self.gallery_images.first()
@@ -49,6 +52,7 @@ class VrblogPage(Page):
         MultiFieldPanel([
             FieldPanel('date'),
             FieldPanel('tags'),
+            FieldPanel('categories', widget=forms.CheckboxSelectMultiple),
         ], heading="VRblog Information"),
         FieldPanel('intro'),
         FieldPanel('body', classname="full"),
@@ -77,3 +81,22 @@ class VrblogTagIndexPage(Page):
         context = super(VrblogTagIndexPage, self).get_context(request)
         context['blogpages'] = blogpages
         return context
+
+@register_snippet
+class VrblogCategory(models.Model):
+    name = models.CharField(max_length=255)
+    icon = models.ForeignKey(
+        'wagtailimages.Image', null=True, blank=True,
+        on_delete=models.SET_NULL, related_name='+'
+    )
+
+    panels = [
+        FieldPanel('name'),
+        ImageChooserPanel('icon'),
+    ]
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name_plural = 'vrblog categories'
