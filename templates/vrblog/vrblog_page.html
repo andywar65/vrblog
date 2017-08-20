@@ -5,77 +5,56 @@
 {% block body_class %}template-vrblogpage{% endblock %}
 
 {% block content %}
-<a-entity id="room-prova"
+<a-entity id="room-ent"
   position="0 0 0"
   rotation="0 0 0">
 
-  <a-entity id="floor-prova-0"
-  geometry="primitive: plane; width: 4; height: 6"
+  <a-entity id="floor"
+  geometry="primitive: plane; width: 3; height: 3"
   position="0 0 0"
   rotation="-90 0 0"
-  material="color: #666666; src: #floor-image-prova; repeat: 4 6">
+  material="color: #666666; src: ; repeat: 1 1">
   </a-entity>
 
-  <a-entity id="ceiling-prova-0"
-  geometry="primitive: plane; width: 4; height: 6"
-  position="0 2.9 0"
+  <a-entity id="ceiling"
+  geometry="primitive: plane; width: 3; height: 3"
+  position="0 3 0"
   rotation="90 0 0"
   material="color: #81d742; src: ; repeat: 1 1">
   </a-entity>
 
-  <a-entity id="wall-ent-prova-0"
-    position="0 0 -3"
+  <a-entity id="wall-front-ent"
+    position="0 0 -1.5"
     rotation="0 0 0">
-    <a-entity id="wall-ent-prova-0-label" scale="2 2 2" position="0 0.1 0.01"
+    <a-entity id="wall-front-label" scale="2 2 2" position="0 0.1 0.01"
     text="value: {{ page.title }}; color: black; align: center;"></a-entity>
-      <a-plane id="wall-prova-0" position="0 1.45 0"
-      width="4" height="2.9" src="#wall-image-prova-0">
+      <a-plane id="wall-front" position="0 1.5 0"
+      width="3" height="3" src="">
       </a-plane>
   </a-entity>
 
-  <a-entity id="wall-ent-prova-1"
-    position="2 0 0"
+  <a-entity id="wall-left-ent"
+    position="1.5 0 0"
     rotation="0 -90 0">
-    <a-plane id="wall-prova-1" position="0 1.95 0"
-    width="6" height="1.9" color="#81d742">
-    </a-plane>
-    <a-entity id="tiling-prova-1" geometry="primitive: plane; width: 6; height: 1"
-              position="0 0.5 0"
-              material="src: #tiling-image-prova; repeat: 6 1">
-    </a-entity>
+      <a-plane id="wall-left" position="0 1.5 0"
+      width="3" height="3" src="">
+      </a-plane>
   </a-entity>
 
-  <a-entity id="wall-ent-prova-2"
-    position="0 0 3"
-    rotation="0 -180 0">
-    <a-plane id="wall-prova-2" position="0 1.6 0"
-    width="4" height="2.6" color="#81d742">
-    </a-plane>
-    <a-plane id="skirting-prova-2" position="0 0.15 0" width="4"
-      height="0.3" color="#1e73be">
-    </a-plane>
+  <a-entity id="wall-back-ent"
+    position="0 0 1.5"
+    rotation="0 180 0">
+      <a-plane id="wall-back" position="0 1.5 0"
+      width="3" height="3" src="">
+      </a-plane>
   </a-entity>
 
-  <a-entity id="wall-ent-prova-3"
-    position="-2 0 1.5"
-    rotation="0 -270 0">
-    <a-plane id="wall-prova-3" position="0 2.45 0"
-    width="3" height="0.9" color="#81d742">
-    </a-plane>
-    <a-plane id="tiling-prova-3" position="0 1 0" width="3"
-      height="2" color="#dd3333">
-    </a-plane>
-  </a-entity>
-
-  <a-entity id="wall-ent-prova-4"
-    position="-2 0 -1.5"
-    rotation="0 -270 0">
-    <a-plane id="wall-prova-4" position="0 1.95 0"
-    width="3" height="1.9" color="#81d742">
-    </a-plane>
-    <a-plane id="tiling-prova-4" position="0 0.5 0" width="3"
-      height="1" color="#dd3333">
-    </a-plane>
+  <a-entity id="wall-right-ent"
+    position="-1.5 0 0"
+    rotation="0 90 0">
+      <a-plane id="wall-right" position="0 1.5 0"
+      width="3" height="3" src="">
+      </a-plane>
   </a-entity>
 
   <p class='meta'>{{ page.date }}</p>
