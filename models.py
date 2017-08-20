@@ -32,7 +32,7 @@ class VrblogPageTag(TaggedItemBase):
 class VrblogPage(Page):
     date = models.DateField("Post date")
     intro = models.CharField(max_length=250)
-    body = RichTextField(blank=True)
+    body = models.TextField(blank=True)
     tags = ClusterTaggableManager(through=VrblogPageTag, blank=True)
     categories = ParentalManyToManyField('vrblog.VrblogCategory', blank=True)
 
