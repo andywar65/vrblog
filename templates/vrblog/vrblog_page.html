@@ -30,19 +30,19 @@
         geometry="primitive: plane; width: 3; height: 0.2"
         position="0 2.9 0"
         material="color: #ffffff; src: ; repeat: 1 1"
-        text="value: {{ page.title }}; color: black; align: center; wrap-count: 30;">
+        text="value: {{ page.title }}; color: black; baseline: center; align: center; wrap-count: 30;">
       </a-entity>
       <a-entity id="wall-front-intro"
         geometry="primitive: plane; width: 3; height: 0.1"
         position="0 2.75 0"
         material="color: #eeeeee; src: ; repeat: 1 1"
-        text="value: {{ page.intro }}; color: black; align: center; wrap-count: 60;">
+        text="value: {{ page.intro }}; color: black; baseline: center; align: center; wrap-count: 60;">
       </a-entity>
       <a-entity id="wall-front-date"
         geometry="primitive: plane; width: 3; height: 0.1"
         position="0 2.65 0"
         material="color: #dddddd; src: ; repeat: 1 1"
-        text="value: Published {{ page.date }}; color: black; align: left; wrap-count: 60;">
+        text="value: Published {{ page.date }}; color: black; baseline: center; align: left; wrap-count: 60;">
       </a-entity>
       <a-entity id="wall-front-body"
         geometry="primitive: plane; width: 3; height: 2.6"
@@ -63,9 +63,14 @@
   <a-entity id="wall-back-ent"
     position="0 0 1.5"
     rotation="0 180 0">
-      <a-plane id="wall-back" position="0 1.5 0"
-      width="3" height="3" src="">
-      </a-plane>
+		<a-entity id="wall-back-link"
+			geometry="primitive: plane; width: 3; height: 3"
+			position="0 1.5 0"
+			material="color: #dddddd; src: ; repeat: 1 1"
+			text="value: <<< Click to return to VRblog Index Page; color: black; align: right; wrap-count: 50;">
+			<a-link href="{{ page.get_parent.url }}" image="" on="click"
+			position="-1 0 0.01" scale="0.2 0.2 0.2"></a-link>
+		</a-entity>
   </a-entity>
 
   <a-entity id="wall-right-ent"
@@ -96,8 +101,6 @@
       <p>{{ item.caption }}</p>
     </div>
   {% endfor %}
-
-  <p><a href="{{ page.get_parent.url }}">Return to VRblog Index Page</a></p>
 
   {% if page.tags.all.count %}
   <div class="tags">
