@@ -32,7 +32,7 @@ class VrblogPageTag(TaggedItemBase):
 class VrblogPage(Page):
     date = models.DateField("Post date")
     intro = models.CharField(max_length=250)
-    body = models.TextField(blank=True)
+    #body = models.TextField(blank=True)
     tags = ClusterTaggableManager(through=VrblogPageTag, blank=True)
     categories = ParentalManyToManyField('vrblog.VrblogCategory', blank=True)
 
@@ -45,7 +45,7 @@ class VrblogPage(Page):
 
     search_fields = Page.search_fields + [
         index.SearchField('intro'),
-        index.SearchField('body'),
+        #index.SearchField('body'),
     ]
 
     content_panels = Page.content_panels + [
@@ -55,8 +55,8 @@ class VrblogPage(Page):
             FieldPanel('categories', widget=forms.CheckboxSelectMultiple),
         ], heading="VRblog Information"),
         FieldPanel('intro'),
-        FieldPanel('body', classname="full"),
-        InlinePanel('gallery_images', label="Gallery images"),
+        #FieldPanel('body', classname="full"),
+        InlinePanel('gallery_images', label="Text + Gallery images", help_text="No more than six Text/Images", max_num=6,),
     ]
 
 class VrblogPageGalleryImage(Orderable):
@@ -64,11 +64,11 @@ class VrblogPageGalleryImage(Orderable):
     image = models.ForeignKey(
         'wagtailimages.Image', on_delete=models.CASCADE, related_name='+'
     )
-    caption = models.CharField(blank=True, max_length=250)
+    caption = models.TextField("Text",)
 
     panels = [
-        ImageChooserPanel('image'),
         FieldPanel('caption'),
+        ImageChooserPanel('image'),
     ]
 
 class VrblogTagIndexPage(Page):
