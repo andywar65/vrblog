@@ -27,28 +27,25 @@
     position="0 0 -1.5"
     rotation="0 0 0">
       <a-entity id="wall-front-title"
-        geometry="primitive: plane; width: 3; height: 0.2"
-        position="0 2.9 0"
-        material="color: #ffffff; src: ; repeat: 1 1"
-        text="value: {{ page.title }}; color: black; baseline: center; align: center; wrap-count: 30;">
+        geometry="primitive: plane; width: 3; height: 1.35"
+        position="0 2.325 0"
+        material="color: #ffffff; src: ; repeat: 1 1">
+		<a-text value="{{ page.title }}" color="black" baseline="bottom" align="center" width="3"
+		position="0 -0.64 0" wrap-count="30"></a-text>
+      </a-entity>
+	  <a-entity id="wall-front-date"
+        geometry="primitive: plane; width: 3; height: 0.1"
+        position="0 1.6 0"
+        material="color: #cccccc; src: ; repeat: 1 1">
+		<a-text value="Published {{ page.date }}" color="black" baseline="center" align="left" width="3"
+		position="-1.5 0 0" wrap-count="80"></a-text>
       </a-entity>
       <a-entity id="wall-front-intro"
-        geometry="primitive: plane; width: 3; height: 0.1"
-        position="0 2.75 0"
-        material="color: #eeeeee; src: ; repeat: 1 1"
-        text="value: {{ page.intro }}; color: black; baseline: center; align: center; wrap-count: 60;">
-      </a-entity>
-      <a-entity id="wall-front-date"
-        geometry="primitive: plane; width: 3; height: 0.1"
-        position="0 2.65 0"
-        material="color: #dddddd; src: ; repeat: 1 1"
-        text="value: Published {{ page.date }}; color: black; baseline: center; align: left; wrap-count: 60;">
-      </a-entity>
-      <a-entity id="wall-front-body"
-        geometry="primitive: plane; width: 3; height: 2.6"
-        position="0 1.3 0"
-        material="color: #ffffff; src: ; repeat: 1 1"
-        text="value: {{ page.body }}; color: black; align: left; wrap-count: 50;">
+        geometry="primitive: plane; width: 3; height: 1.55"
+        position="0 0.775 0"
+        material="color: #ffffff; src: ; repeat: 1 1">
+		<a-text value="{{ page.intro }}" color="black" baseline="top" align="left" width="3"
+		position="-1.5 0.725 0" wrap-count="60"></a-text>
       </a-entity>
   </a-entity>
 
