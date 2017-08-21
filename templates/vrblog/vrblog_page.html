@@ -52,10 +52,10 @@
       </a-entity>
   </a-entity>
 
-  <a-entity id="wall-left-ent"
+  <a-entity id="wall-right-ent"
     position="1.5 0 0"
     rotation="0 -90 0">
-      <a-plane id="wall-left" position="0 1.5 0"
+      <a-plane id="wall-right" position="0 1.5 0"
       width="3" height="3" src="">
       </a-plane>
   </a-entity>
@@ -73,11 +73,12 @@
 		</a-entity>
   </a-entity>
 
-  <a-entity id="wall-right-ent"
+  <a-entity id="wall-left-ent"
     position="-1.5 0 0"
     rotation="0 90 0">
-      <a-plane id="wall-right" position="0 1.5 0"
-      width="3" height="3" src="">
+	{% image page.main_image original as temp_image %}
+      <a-plane id="wall-left" position="0 1.5 0"
+      width="3" height="3" src="{{ temp_image.url }}">
       </a-plane>
   </a-entity>
 
