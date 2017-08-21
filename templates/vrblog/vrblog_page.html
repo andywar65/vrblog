@@ -36,8 +36,8 @@
 	  <a-entity id="wall-front-date"
         geometry="primitive: plane; width: 3; height: 0.1"
         position="0 1.6 0"
-        material="color: #cccccc; src: ; repeat: 1 1">
-		<a-text value="Published {{ page.date }}" color="black" baseline="center" align="left" width="3"
+        material="color: #333333; src: ; repeat: 1 1">
+		<a-text value="Published {{ page.date }}" color="white" baseline="center" align="left" width="3"
 		position="-1.5 0 0" wrap-count="80"></a-text>
       </a-entity>
       <a-entity id="wall-front-intro"
@@ -73,7 +73,7 @@
   <a-entity id="wall-left-ent"
     position="-1.5 0 0"
     rotation="0 90 0">
-	{% image page.main_image original as temp_image %}
+	{% image page.main_image fill-1000x1000 as temp_image %}
       <a-plane id="wall-left" position="0 1.5 0"
       width="3" height="3" src="{{ temp_image.url }}">
       </a-plane>
