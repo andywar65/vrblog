@@ -53,6 +53,10 @@ class VrblogPage(Page):
         else:
             return None
 
+    def color(self):
+        color=['red', 'blue', 'green', 'yellow']
+        return color
+
     def gallery_position(self):
         gallery_items = self.gallery_images.count()
         if gallery_items:

@@ -87,10 +87,12 @@
   <a-entity id="wall-left-ent"
     position="-1.5 0 0"
     rotation="0 90 0">
+	{% with color=page.color %}
 	{% image page.main_image fill-1000x1000 as temp_image %}
       <a-plane id="wall-left" position="0 1.5 0"
-      width="3" height="3" src="{{ temp_image.url }}" color="yellow">
+      width="3" height="3" src="{{ temp_image.url }}" color="{{ color|random }}">
       </a-plane>
+	{% endwith %}
   </a-entity>
 
   {% with categories=page.categories.all %}
