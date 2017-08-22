@@ -49,19 +49,23 @@
       </a-entity>
   </a-entity>
   
-	{% with gallery_count=page.gallery_images.all.count %}
+  <a-entity id="wall-right-ent"
+    position="1.5 0 -1.5"
+    rotation="0 -90 0">
+  
+	{% with gallery_sizes=page.gallery_sizes gallery_position=page.gallery_position %}
 		{% for item in page.gallery_images.all %}
 			{% image item.image fill-1000x1000 as temp_image %}
 			  <a-entity id="wall-right-ent-{{ temp_image.alt }}"
-				position="1.5 0 0"
-				rotation="0 -90 0">
-				  <a-plane id="wall-right-{{ temp_image.alt }}" position="0 1.5 0"
-				  width="3" height="3" src="{{ temp_image.url }}">
+				position="{{ gallery_position.forloop.counter0 }} 0 0">
+				  <a-plane id="wall-right-{{ temp_image.alt }}" position="{{ gallery_sizes.half }} 1.5 0"
+				  width="{{ gallery_sizes.module }}" height="3" src="{{ temp_image.url }}">
 				  </a-plane>
 			  </a-entity>
 		{% endfor %}
 	{% endwith %}
-
+	
+	</a-entity>
   <a-entity id="wall-back-ent"
     position="0 0 1.5"
     rotation="0 180 0">

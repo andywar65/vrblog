@@ -43,6 +43,27 @@ class VrblogPage(Page):
         else:
             return None
 
+    def gallery_sizes(self):
+        gallery_items = self.gallery_images.count()
+        if gallery_items:
+            gallery_sizes = {'module': 3/gallery_items, 
+                'half': 3/gallery_items/2,
+                'center': 3/gallery_items*0.75,}
+            return gallery_sizes
+        else:
+            return None
+
+    def gallery_position(self):
+        gallery_items = self.gallery_images.count()
+        if gallery_items:
+            module = 3/gallery_items
+            gallery_position = []
+            for item in range(0, gallery_items):
+                gallery_position.append( module*item )
+            return gallery_position
+        else:
+            return None
+
     search_fields = Page.search_fields + [
         index.SearchField('intro'),
         #index.SearchField('body'),
