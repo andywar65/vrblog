@@ -5,6 +5,8 @@ A-Frame is a JavaScript library that lets you embed VR into HTML tags!
 In a first phase I followed Wagtail tutorial for setting up a blog app, then I
 started implementing the VR part.
 The vrblog_base.html holds all the invariant parts of the A-Frame tags.
-vrblog_page.html extends the base. By now it's just a room with the title, intro,
-date and body template tags associated to the front wall. On the back wall is a
-link target to navigate to the parent page.
+vrblog_page.html extends the base. Blog page is transformed in a 3x3x3 room
+where you can walk around. On the front wall you find the title, intro,
+and date template tags. On the right an image gallery alternated with text.
+On the left the main image in random colors. On the back wall is a link target 
+to navigate to the parent page.
