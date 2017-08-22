@@ -57,6 +57,17 @@ class VrblogPage(Page):
         color=['red', 'blue', 'green', 'yellow', 'cyan', 'magenta',]
         return color
 
+    def category_string(self):
+        categories=self.categories.all()
+        if categories:
+            category_list=[]
+            for category in categories:
+                category_list.append(category.name)
+            category_string = ", ".join(category_list)
+            return category_string
+        else:
+            return None
+
     def gallery_position(self):
         gallery_count = self.gallery_images.count()
         if gallery_count:

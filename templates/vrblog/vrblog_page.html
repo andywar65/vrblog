@@ -46,6 +46,12 @@
         material="color: #ffffff; src: ; repeat: 1 1">
 		<a-text value="{{ page.intro }}" color="black" baseline="top" align="left" width="3"
 		position="-1.5 0.725 0" wrap-count="60"></a-text>
+		{% with category_string=page.category_string %}
+			{% if category_string %}
+			<a-text value="Published in: {{ category_string }}" color="black" baseline="bottom" align="left" width="3"
+			position="-1.5 -0.725 0" wrap-count="80"></a-text>
+			{% endif %}
+		{% endwith %}
       </a-entity>
   </a-entity>
   
@@ -63,7 +69,7 @@
 							<a-text value="{{ item.caption }}" color="black" baseline="center" align="right" width="{{ gallery_sizes.half }}"
 							position="0 0.1 0" wrap-count="30"></a-text>
 						</a-plane>
-						<a-plane id="wall-right-image-{{ temp_image.alt }}" position="{{ gallery_sizes.center }} 1.6 0.01"
+						<a-plane id="wall-right-image-{{ temp_image.alt }}" position="{{ gallery_sizes.center }} 1.6 0.001"
 							width="{{ gallery_sizes.half }}" height="{{ gallery_sizes.half }}" src="{{ temp_image.url }}">
 						</a-plane>
 				</a-entity>
