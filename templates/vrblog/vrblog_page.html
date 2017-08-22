@@ -56,12 +56,17 @@
 	{% with gallery_sizes=page.gallery_sizes gallery_position=page.gallery_position %}
 		{% for item in page.gallery_images.all %}
 			{% image item.image fill-1000x1000 as temp_image %}
-			  <a-entity id="wall-right-ent-{{ temp_image.alt }}"
-				position="{{ gallery_position.forloop.counter0 }} 0 0">
-				  <a-plane id="wall-right-{{ temp_image.alt }}" position="{{ gallery_sizes.half }} 1.5 0"
-				  width="{{ gallery_sizes.module }}" height="3" src="{{ temp_image.url }}">
-				  </a-plane>
-			  </a-entity>
+				<a-entity id="wall-right-ent-{{ temp_image.alt }}"
+					position="{{ gallery_position.forloop.counter0 }} 0 0">
+						<a-plane id="wall-right-{{ temp_image.alt }}" position="{{ gallery_sizes.half }} 1.5 0"
+							width="{{ gallery_sizes.module }}" height="3" >
+							<a-text value="{{ item.caption }}" color="black" baseline="center" align="left" width="{{ gallery_sizes.half }}"
+							position="-{{ gallery_sizes.half }} 0.1 0" wrap-count="30"></a-text>
+						</a-plane>
+						<a-plane id="wall-right-image-{{ temp_image.alt }}" position="{{ gallery_sizes.center }} 1.6 0.01"
+							width="{{ gallery_sizes.half }}" height="{{ gallery_sizes.half }}" src="{{ temp_image.url }}">
+						</a-plane>
+				</a-entity>
 		{% endfor %}
 	{% endwith %}
 	
