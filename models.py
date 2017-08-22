@@ -54,16 +54,19 @@ class VrblogPage(Page):
             return None
 
     def color(self):
-        color=['red', 'blue', 'green', 'yellow']
+        color=['red', 'blue', 'green', 'yellow', 'cyan', 'magenta',]
         return color
 
     def gallery_position(self):
-        gallery_items = self.gallery_images.count()
-        if gallery_items:
-            module = 3/gallery_items
-            gallery_position = []
-            for item in range(0, gallery_items):
-                gallery_position.append( module*item )
+        gallery_count = self.gallery_images.count()
+        if gallery_count:
+            module = 3/gallery_count
+            gallery_position = {}
+            x = 0
+            gallery_items = self.gallery_images.all()
+            for item in gallery_items:
+                gallery_position[module*x]=item
+                x += 1
             return gallery_position
         else:
             return None

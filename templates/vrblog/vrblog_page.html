@@ -54,10 +54,10 @@
     rotation="0 -90 0">
   
 	{% with gallery_sizes=page.gallery_sizes gallery_position=page.gallery_position %}
-		{% for item in page.gallery_images.all %}
+		{% for position, item in gallery_position.items %}
 			{% image item.image fill-1000x1000 as temp_image %}
 				<a-entity id="wall-right-ent-{{ temp_image.alt }}"
-					position="{{ gallery_position.forloop.counter0 }} 0 0">
+					position="{{ position }} 0 0">
 						<a-plane id="wall-right-{{ temp_image.alt }}" position="{{ gallery_sizes.half }} 1.5 0"
 							width="{{ gallery_sizes.module }}" height="3" >
 							<a-text value="{{ item.caption }}" color="black" baseline="center" align="right" width="{{ gallery_sizes.half }}"
