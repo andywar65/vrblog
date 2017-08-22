@@ -1,4 +1,5 @@
 {% load static wagtailuserbar %}
+{% load wagtailcore_tags wagtailimages_tags %}
 
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -35,6 +36,8 @@
       {# wagtailuserbar #}
         <a-scene>
           <a-assets>
+			{% image page.get_parent.main_image as temp_image %}
+			<img id="parent_main_image" src="{{ temp_image.url }}">
           </a-assets>
             {% block content %}{% endblock %}
             <a-sky color="black"></a-sky>

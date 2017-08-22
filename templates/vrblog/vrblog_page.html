@@ -84,8 +84,9 @@
 			geometry="primitive: plane; width: 3; height: 3"
 			position="0 1.5 0"
 			material="color: #dddddd; src: ; repeat: 1 1"
-			text="value: <<< Click to return to VRblog Index Page; color: black; align: right; wrap-count: 50;">
-			<a-link href="{{ page.get_parent.url }}" image="" on="click"
+			text="value: <<< Click to return to Parent Page; color: black; align: right; wrap-count: 50;">
+			<a-link href="{{ page.get_parent.url }}" title="Back to Parent Page" 
+			image="#parent_main_image" on="click"
 			position="-1 0 0.01" scale="0.2 0.2 0.2"></a-link>
 		</a-entity>
   </a-entity>
