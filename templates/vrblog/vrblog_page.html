@@ -71,7 +71,7 @@
 							position="0 0.1 0" wrap-count="30"></a-text>
 						</a-plane>
 						<a-plane id="wall-right-image-{{ temp_image.alt }}" position="{{ gallery_sizes.center }} 1.6 0.001"
-							width="{{ gallery_sizes.half }}" height="{{ gallery_sizes.half }}" src="{{ temp_image.url }}">
+							width="{{ gallery_sizes.half }}" height="{{ gallery_sizes.half }}" src="#{{ temp_image.alt }}">
 						</a-plane>
 				</a-entity>
 		{% endfor %}
@@ -103,7 +103,7 @@
 	{% with color=page.color %}
 	{% image page.main_image fill-1000x1000 as temp_image %}
       <a-plane id="wall-left" position="0 1.5 0"
-      width="3" height="3" src="{{ temp_image.url }}" color="{{ color|random }}">
+      width="3" height="3" src="#{{ temp_image.alt }}" color="{{ color|random }}">
       </a-plane>
 	{% endwith %}
   </a-entity>
