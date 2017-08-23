@@ -60,6 +60,7 @@
     rotation="0 -90 0">
   
 	{% with gallery_sizes=page.gallery_sizes gallery_position=page.gallery_position %}
+		{% if gallery_sizes %}
 		{% for position, item in gallery_position.items %}
 			{% image item.image fill-1000x1000 as temp_image %}
 				<a-entity id="wall-right-ent-{{ temp_image.alt }}"
@@ -74,6 +75,11 @@
 						</a-plane>
 				</a-entity>
 		{% endfor %}
+		{% else %}
+			<a-plane id="wall-right" position="1.5 1.5 0"
+							width="3" height="3" >
+			</a-plane>
+		{% endif %}
 	{% endwith %}
 	
 	</a-entity>
