@@ -36,8 +36,8 @@
       {# wagtailuserbar #}
         <a-scene>
           <a-assets>
-			{% image page.get_parent.main_image as temp_image %}
-			<img id="parent_main_image" src="{{ temp_image.url }}">
+			{# image page.get_parent.slug.main_image as temp_image #}
+			<img id="parent_main_image" src="{% static 'images/target.png' %}">
           </a-assets>
             {% block content %}{% endblock %}
             <a-sky color="black"></a-sky>
