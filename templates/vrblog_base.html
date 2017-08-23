@@ -38,6 +38,7 @@
           <a-assets>
 			{# image page.get_parent.slug.main_image as temp_image #}
 			<img id="parent_main_image" src="{% static 'images/target.png' %}">
+			<img id="parquet" src="{% static 'images/parquet.jpg' %}">
 			{% with gallery_items=page.gallery_images.all %}
 				{% if gallery_items %}
 					{% for item in gallery_items %}
