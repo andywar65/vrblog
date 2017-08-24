@@ -46,12 +46,12 @@
         material="color: #ffffff; src: ; repeat: 1 1">
 		<a-text value="{{ page.intro }}" color="black" baseline="top" align="left" width="3"
 		position="-1.5 0.725 0" wrap-count="60"></a-text>
-		{% with category_string=page.category_string %}
-			{% if category_string %}
-			<a-text value="Published in: {{ category_string }}" color="black" baseline="bottom" align="left" width="3"
+		{% with category_string=page.category_string tag_string=page.tag_string %}
+			<a-text value="Published in: {{ category_string }}\nTags: {{ tag_string }}" 
+			color="black" baseline="bottom" align="left" width="3"
 			position="-1.5 -0.725 0" wrap-count="80"></a-text>
-			{% endif %}
 		{% endwith %}
+		
       </a-entity>
   </a-entity>
   
@@ -89,11 +89,12 @@
 		<a-entity id="wall-back-link"
 			geometry="primitive: plane; width: 3; height: 3"
 			position="0 1.5 0"
-			material="color: #dddddd; src: ; repeat: 1 1"
-			text="value: <<< Click to return to Parent Page; color: black; align: right; wrap-count: 50;">
+			material="color: #dddddd; src: ; repeat: 1 1">
+			<a-text value="Click to return to Parent Page" color="black" baseline="top" align="center" width="3"
+			position="0 -1.1 0" wrap-count="60"></a-text>
 			<a-link href="{{ page.get_parent.url }}" title="Back to Parent Page" 
 			image="#parent_main_image" on="click"
-			position="-1 0 0.01" scale="0.2 0.2 0.2"></a-link>
+			position="0 0 0.01"></a-link>
 		</a-entity>
   </a-entity>
 

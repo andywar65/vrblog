@@ -66,7 +66,20 @@ class VrblogPage(Page):
             category_string = ", ".join(category_list)
             return category_string
         else:
-            return None
+            category_string = 'Uncategorized'
+            return category_string
+
+    def tag_string(self):
+        tags=self.tags.all()
+        if tags:
+            tag_list=[]
+            for tag in tags:
+                tag_list.append(tag)
+            tag_string = ", ".join(tag_list)
+            return tag_string
+        else:
+            tag_string = 'None'
+            return tag_string
 
     def gallery_position(self):
         gallery_count = self.gallery_images.count()
@@ -95,7 +108,7 @@ class VrblogPage(Page):
         ], heading="VRblog Information"),
         FieldPanel('intro'),
         #FieldPanel('body', classname="full"),
-        InlinePanel('gallery_images', label="Text + Gallery images", help_text="No more than six Text/Images", max_num=6,),
+        InlinePanel('gallery_images', label="Text + Gallery images",),
     ]
 
 class VrblogPageGalleryImage(Orderable):
