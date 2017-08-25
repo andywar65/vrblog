@@ -74,7 +74,7 @@ class VrblogPage(Page):
         if tags:
             tag_list=[]
             for tag in tags:
-                tag_list.append(tag)
+                tag_list.append(tag.name)
             tag_string = ", ".join(tag_list)
             return tag_string
         else:

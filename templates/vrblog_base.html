@@ -1,5 +1,4 @@
 {% load static wagtailuserbar %}
-{% load wagtailcore_tags wagtailimages_tags %}
 
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -35,19 +34,7 @@
     <body class="{% block body_class %}{% endblock %}">
       {# wagtailuserbar #}
         <a-scene>
-          <a-assets>
-			{# image page.get_parent.slug.main_image as temp_image #}
-			<img id="parent_main_image" src="{% static 'images/target.png' %}">
-			<img id="parquet" src="{% static 'images/parquet.jpg' %}">
-			{% with gallery_items=page.gallery_images.all %}
-				{% if gallery_items %}
-					{% for item in gallery_items %}
-						{% image item.image fill-1000x1000 as temp_image %}
-						<img id="{{ temp_image.alt }}" src="{{ temp_image.url }}">
-					{% endfor %}
-				{% endif %}
-			{% endwith %}
-          </a-assets>
+          
             {% block content %}{% endblock %}
             <a-sky color="black"></a-sky>
             <a-entity id="camera-ent">

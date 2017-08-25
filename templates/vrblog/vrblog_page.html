@@ -1,10 +1,23 @@
 {% extends "vrblog_base.html" %}
-
+{% load static %}
 {% load wagtailcore_tags wagtailimages_tags %}
 
 {% block body_class %}template-vrblogpage{% endblock %}
 
 {% block content %}
+<a-assets>
+	{# image page.get_parent.slug.main_image as temp_image #}
+	<img id="parent_main_image" src="{% static 'images/target.png' %}">
+	<img id="parquet" src="{% static 'images/parquet.jpg' %}">
+	{% with gallery_items=page.gallery_images.all %}
+		{% if gallery_items %}
+			{% for item in gallery_items %}
+				{% image item.image fill-1000x1000 as temp_image %}
+				<img id="{{ temp_image.alt }}" src="{{ temp_image.url }}">
+			{% endfor %}
+		{% endif %}
+	{% endwith %}
+</a-assets>
 <a-entity id="room-ent"
   position="0 0 0"
   rotation="0 0 0">
@@ -90,11 +103,25 @@
 			geometry="primitive: plane; width: 3; height: 3"
 			position="0 1.5 0"
 			material="color: #dddddd; src: ; repeat: 1 1">
-			<a-text value="Click to return to Parent Page" color="black" baseline="top" align="center" width="3"
-			position="0 -1.1 0" wrap-count="60"></a-text>
+			<a-text value="Click to return to Parent Page" color="black" baseline="bottom" align="center" width="3"
+			position="0 0.1 0" wrap-count="60"></a-text>
 			<a-link href="{{ page.get_parent.url }}" title="Back to Parent Page" 
 			image="#parent_main_image" on="click"
-			position="0 0 0.01"></a-link>
+			position="0 0.75 0.01" scale="0.5 0.5 0.5"></a-link>
+			{% if page.get_prev_siblings %}
+			<a-text value="Previous Page" color="black" baseline="top" align="center" width="3"
+			position="-0.75 -0.1 0" wrap-count="60"></a-text>
+			<a-link href="{{ page.get_prev_siblings.live.first.url }}" title="Previous Page" 
+			image="#parent_main_image" on="click"
+			position="-0.75 -0.75 0.01" scale="0.5 0.5 0.5"></a-link>
+			{% endif %}
+			{% if page.get_next_siblings %}
+			<a-text value="Next Page" color="black" baseline="top" align="center" width="3"
+			position="0.75 -0.1 0" wrap-count="60"></a-text>
+			<a-link href="{{ page.get_next_siblings.live.first.url }}" title="Next Page" 
+			image="#parent_main_image" on="click"
+			position="0.75 -0.75 0.01" scale="0.5 0.5 0.5"></a-link>
+			{% endif %}
 		</a-entity>
   </a-entity>
 
@@ -108,30 +135,5 @@
       </a-plane>
 	{% endwith %}
   </a-entity>
-
-  {% with categories=page.categories.all %}
-    {% if categories %}
-      <h3>Posted in:</h3>
-        <ul>
-          {% for category in categories %}
-            <li>
-              {% image category.icon fill-32x32 style="vertical-align: middle" %}
-              {{ category.name }}
-            </li>
-          {% endfor %}
-        </ul>
-    {% endif %}
-  {% endwith %}
-
-  {% if page.tags.all.count %}
-  <div class="tags">
-    <h3>Tags</h3>
-      {% for tag in page.tags.all %}
-        <a href="{% slugurl 'tags' %}?tag={{ tag }}">
-          <button type="button">{{ tag }}</button>
-        </a>
-      {% endfor %}
-  </div>
-  {% endif %}
 
 {% endblock %}
