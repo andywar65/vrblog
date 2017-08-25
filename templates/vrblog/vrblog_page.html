@@ -7,7 +7,7 @@
 {% block content %}
 <a-assets>
 	{# image page.get_parent.slug.main_image as temp_image #}
-	<img id="parent_main_image" src="{% static 'images/target.jpg' %}">
+	<img id="parent_main_image" src="{% static 'images/target.png' %}">
 	<img id="parquet" src="{% static 'images/parquet.jpg' %}">
 	{% with gallery_items=page.gallery_images.all %}
 		{% if gallery_items %}
@@ -103,11 +103,13 @@
 			geometry="primitive: plane; width: 3; height: 3"
 			position="0 1.5 0"
 			material="color: #dddddd; src: ; repeat: 1 1">
+			{% if page.get_parent %}
 			<a-text value="Click to return to Parent Page" color="black" baseline="bottom" align="center" width="3"
 			position="0 0.1 0" wrap-count="60"></a-text>
 			<a-link href="{{ page.get_parent.url }}" title="Back to Parent Page" 
 			image="#parent_main_image" on="click"
 			position="0 0.75 0.01" scale="0.5 0.5 0.5"></a-link>
+			{% endif %}
 			{% if page.get_prev_siblings %}
 			<a-text value="Previous Page" color="black" baseline="top" align="center" width="3"
 			position="-0.75 -0.1 0" wrap-count="60"></a-text>
