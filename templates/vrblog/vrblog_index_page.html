@@ -67,6 +67,38 @@
       </a-entity>
   </a-entity>
 
+  <a-entity id="wall-right-ent"
+    position="1.5 0 -1.5"
+    rotation="0 -90 0">
+  
+	{% with link_sizes=page.link_sizes link_position=page.link_position %}
+		{% if link_sizes %}
+		{% for position, item in link_position.items %}
+		Item = {{ item }}
+			{% image item.specific.main_image fill-1000x1000 as temp_image %}
+				<a-entity id="wall-right-ent-{{ temp_image.alt }}"
+					position="{{ position }} 0 0">
+						<a-plane id="wall-right-{{ temp_image.alt }}" position="{{ link_sizes.half }} 1.5 0"
+							width="{{ link_sizes.module }}" height="3" >
+							<a-text value="{{ item.title }}" color="black" baseline="bottom" align="right" width="{{ link_sizes.half }}"
+							position="0 0.15 0" wrap-count="20"></a-text>
+							<a-text value="{{ item.specific.intro }}" color="black" baseline="top" align="right" width="{{ link_sizes.half }}"
+							position="0 0.05 0" wrap-count="30"></a-text>
+							<a-link id="wall-right-image-{{ temp_image.alt }}" position="{{ link_sizes.center }} 1.6 0.001"
+							scale="{{ link_sizes.radius }} {{ link_sizes.radius }} {{ link_sizes.radius }}" src="#{{ temp_image.alt }}">
+						</a-link>
+						</a-plane>
+						
+				</a-entity>
+		{% endfor %}
+		{% else %}
+			<a-plane id="wall-right" position="1.5 1.5 0"
+							width="3" height="3" >
+			</a-plane>
+		{% endif %}
+	{% endwith %}
+  </a-entity>
+  
   <a-entity id="wall-back-ent"
     position="0 0 1.5"
     rotation="0 180 0">

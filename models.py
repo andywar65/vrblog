@@ -29,6 +29,31 @@ class VrblogIndexPage(Page):
         else:
             return None
 
+    def link_sizes(self):
+        link_items = self.get_children().live().count()
+        if link_items:
+            link_sizes = {'module': 3/link_items, 
+                'half': 3/link_items*0.5,
+                'radius': 3/link_items*.25,
+                'center': 3/link_items*0.75,}
+            return link_sizes
+        else:
+            return None
+
+    def link_position(self):
+        live_children = self.get_children().live()
+        if live_children:
+            module = 3/live_children.count()
+            link_position = {}
+            x = 0
+            blogpages = live_children.order_by('-first_published_at')
+            for item in blogpages:
+                link_position[module*x]=item
+                x += 1
+            return link_position
+        else:
+            return None
+
     content_panels = Page.content_panels + [
         FieldPanel('intro', classname="full"),
         InlinePanel('index_gallery_images', label="Main image", max_num=1),
