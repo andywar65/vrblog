@@ -22,6 +22,13 @@ class VrblogIndexPage(Page):
         context['blogpages'] = blogpages
         return context
 
+    def main_image(self):
+        gallery_item = self.index_gallery_images.first()
+        if gallery_item:
+            return gallery_item.image
+        else:
+            return None
+
     content_panels = Page.content_panels + [
         FieldPanel('intro', classname="full"),
         InlinePanel('index_gallery_images', label="Main image", max_num=1),
