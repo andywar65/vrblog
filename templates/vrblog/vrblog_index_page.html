@@ -5,9 +5,6 @@
 {% block body_class %}template-vrblogindexpage{% endblock %}
 
 {% block content %}
-<a-assets>
-	<img id="parent_main_image" src="{% static 'images/target.png' %}">
-	<img id="parquet" src="{% static 'images/parquet.jpg' %}">
 	{% with page.main_image as main_image %}
         {% if main_image %}
           {% image main_image fill-1000x1000 as temp_image %}
@@ -74,7 +71,6 @@
 	{% with link_sizes=page.link_sizes link_position=page.link_position %}
 		{% if link_sizes %}
 		{% for position, item in link_position.items %}
-		Item = {{ item }}
 			{% image item.specific.main_image fill-1000x1000 as temp_image %}
 				<a-entity id="wall-right-ent-{{ temp_image.alt }}"
 					position="{{ position }} 0 0">

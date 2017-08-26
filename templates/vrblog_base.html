@@ -1,4 +1,5 @@
 {% load static wagtailuserbar %}
+{% load wagtailcore_tags wagtailimages_tags %}
 
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -34,9 +35,15 @@
     <body class="{% block body_class %}{% endblock %}">
       {# wagtailuserbar #}
         <a-scene>
-          
+          <a-assets>
+			<img id="black_room" src="{% static 'images/target.png' %}">
+			<img id="parquet" src="{% static 'images/parquet.jpg' %}">
+			{% with parent=page.get_parent prev=page.get_prev_siblings.live.first next=page.get_next_siblings.live.first %}
+			{% if parent %}
+			{% endif %}
+			{% endwith %}
             {% block content %}{% endblock %}
-            <a-sky color="black"></a-sky>
+            <a-sky src="#black_room"></a-sky>
             <a-entity id="camera-ent">
                   <a-camera id="camera">
                     <a-light type="point"></a-light>
