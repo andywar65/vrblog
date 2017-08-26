@@ -13,7 +13,7 @@ from wagtail.wagtailsearch import index
 from wagtail.wagtailsnippets.models import register_snippet
 
 class VrblogIndexPage(Page):
-    intro = RichTextField(blank=True)
+    intro = models.CharField(max_length=250)
 
     def get_context(self, request):
         #Update context to include only published posts, in reverse order
@@ -24,6 +24,7 @@ class VrblogIndexPage(Page):
 
     content_panels = Page.content_panels + [
         FieldPanel('intro', classname="full"),
+        InlinePanel('index_gallery_images', label="Main image", max_num=1),
     ]
 
 class VrblogPageTag(TaggedItemBase):
@@ -120,6 +121,18 @@ class VrblogPageGalleryImage(Orderable):
 
     panels = [
         FieldPanel('caption'),
+        ImageChooserPanel('image'),
+    ]
+
+class VrblogIndexPageGalleryImage(Orderable):
+    page = ParentalKey(VrblogIndexPage, related_name='index_gallery_images')
+    image = models.ForeignKey(
+        'wagtailimages.Image', on_delete=models.CASCADE, related_name='+'
+    )
+    caption = models.TextField("Text",)
+
+    panels = [
+        #FieldPanel('caption'),
         ImageChooserPanel('image'),
     ]
 
