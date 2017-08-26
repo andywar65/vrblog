@@ -84,10 +84,11 @@
 							position="0 0.15 0" wrap-count="20"></a-text>
 							<a-text value="{{ item.specific.intro }}" color="black" baseline="top" align="right" width="{{ link_sizes.half }}"
 							position="0 0.05 0" wrap-count="30"></a-text>
-							<a-link id="wall-right-image-{{ temp_image.alt }}" position="{{ link_sizes.center }} 1.6 0.001"
-							scale="{{ link_sizes.radius }} {{ link_sizes.radius }} {{ link_sizes.radius }}" src="#{{ temp_image.alt }}">
+							</a-plane>
+							<a-link id="wall-right-image-{{ temp_image.alt }}" 
+							href="{% pageurl item %}" position="{{ link_sizes.center }} 1.6 0.001" title=""
+							scale="{{ link_sizes.radius }} {{ link_sizes.radius }} {{ link_sizes.radius }}" image="#{{ temp_image.alt }}">
 						</a-link>
-						</a-plane>
 						
 				</a-entity>
 		{% endfor %}
@@ -110,21 +111,21 @@
 			{% if parent %}
 			<a-text value="Click to return to Parent Page" color="black" baseline="bottom" align="center" width="3"
 			position="0 0.1 0" wrap-count="60"></a-text>
-			<a-link href="{{ parent.url }}" title="Back to Parent Page" 
+			<a-link href="{{ parent.url }}" title="" 
 			image="#parent_main_image" on="click"
 			position="0 0.75 0.01" scale="0.5 0.5 0.5"></a-link>
 			{% endif %}
 			{% if prev %}
 			<a-text value="Previous Page" color="black" baseline="top" align="center" width="3"
 			position="-0.75 -0.1 0" wrap-count="60"></a-text>
-			<a-link href="{{ prev.url }}" title="Previous Page" 
+			<a-link href="{{ prev.url }}" title="" 
 			image="#parent_main_image" on="click"
 			position="-0.75 -0.75 0.01" scale="0.5 0.5 0.5"></a-link>
 			{% endif %}
 			{% if next %}
 			<a-text value="Next Page" color="black" baseline="top" align="center" width="3"
 			position="0.75 -0.1 0" wrap-count="60"></a-text>
-			<a-link href="{{ next.url }}" title="Next Page" 
+			<a-link href="{{ next.url }}" title="" 
 			image="#parent_main_image" on="click"
 			position="0.75 -0.75 0.01" scale="0.5 0.5 0.5"></a-link>
 			{% endif %}
