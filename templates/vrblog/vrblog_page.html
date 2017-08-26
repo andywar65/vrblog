@@ -103,27 +103,29 @@
 			geometry="primitive: plane; width: 3; height: 3"
 			position="0 1.5 0"
 			material="color: #dddddd; src: ; repeat: 1 1">
-			{% if page.get_parent %}
+			{% with parent=page.get_parent prev=page.get_prev_siblings.live.first next=page.get_next_siblings.live.first %}
+			{% if parent %}
 			<a-text value="Click to return to Parent Page" color="black" baseline="bottom" align="center" width="3"
 			position="0 0.1 0" wrap-count="60"></a-text>
-			<a-link href="{{ page.get_parent.url }}" title="Back to Parent Page" 
+			<a-link href="{{ parent.url }}" title="Back to Parent Page" 
 			image="#parent_main_image" on="click"
 			position="0 0.75 0.01" scale="0.5 0.5 0.5"></a-link>
 			{% endif %}
-			{% if page.get_prev_siblings %}
+			{% if prev %}
 			<a-text value="Previous Page" color="black" baseline="top" align="center" width="3"
 			position="-0.75 -0.1 0" wrap-count="60"></a-text>
-			<a-link href="{{ page.get_prev_siblings.live.first.url }}" title="Previous Page" 
+			<a-link href="{{ prev.url }}" title="Previous Page" 
 			image="#parent_main_image" on="click"
 			position="-0.75 -0.75 0.01" scale="0.5 0.5 0.5"></a-link>
 			{% endif %}
-			{% if page.get_next_siblings %}
+			{% if next %}
 			<a-text value="Next Page" color="black" baseline="top" align="center" width="3"
 			position="0.75 -0.1 0" wrap-count="60"></a-text>
-			<a-link href="{{ page.get_next_siblings.live.first.url }}" title="Next Page" 
+			<a-link href="{{ next.url }}" title="Next Page" 
 			image="#parent_main_image" on="click"
 			position="0.75 -0.75 0.01" scale="0.5 0.5 0.5"></a-link>
 			{% endif %}
+			{% endwith %}
 		</a-entity>
   </a-entity>
 
