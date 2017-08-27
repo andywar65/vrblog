@@ -112,14 +112,14 @@
 			<a-text value="Previous Page" color="black" baseline="top" align="center" width="3"
 			position="-0.75 -0.1 0" wrap-count="60"></a-text>
 			<a-link href="{{ prev.url }}" title="Previous Page" 
-			image="#parent_main_image" on="click"
+			image="#prev_main_image" on="click"
 			position="-0.75 -0.75 0.01" scale="0.5 0.5 0.5"></a-link>
 			{% endif %}
 			{% if next %}
 			<a-text value="Next Page" color="black" baseline="top" align="center" width="3"
 			position="0.75 -0.1 0" wrap-count="60"></a-text>
 			<a-link href="{{ next.url }}" title="Next Page" 
-			image="#parent_main_image" on="click"
+			image="#next_main_image" on="click"
 			position="0.75 -0.75 0.01" scale="0.5 0.5 0.5"></a-link>
 			{% endif %}
 			{% endwith %}

@@ -39,8 +39,28 @@
 			<img id="black_room" src="{% static 'images/target.png' %}">
 			<img id="parquet" src="{% static 'images/parquet.jpg' %}">
 			{% with parent=page.get_parent prev=page.get_prev_siblings.live.first next=page.get_next_siblings.live.first %}
-			{% if parent %}
+			
+			{% if parent and parent.specific.main_image %}
+			{% image parent.specific.main_image fill-1000x1000 as temp_image %}
+			<img id="parent_main_image" src="{{ temp_image.url }}">
+			{% else %}
+			<img id="parent_main_image" src="{% static 'images/target.png' %}">
 			{% endif %}
+			
+			{% if prev and prev.specific.main_image %}
+			{% image prev.specific.main_image fill-1000x1000 as temp_image %}
+			<img id="prev_main_image" src="{{ temp_image.url }}">
+			{% else %}
+			<img id="prev_main_image" src="{% static 'images/target.png' %}">
+			{% endif %}
+			
+			{% if next and next.specific.main_image %}
+			{% image next.specific.main_image fill-1000x1000 as temp_image %}
+			<img id="next_main_image" src="{{ temp_image.url }}">
+			{% else %}
+			<img id="next_main_image" src="{% static 'images/target.png' %}">
+			{% endif %}
+			
 			{% endwith %}
             {% block content %}{% endblock %}
             <a-sky src="#black_room"></a-sky>
