@@ -105,36 +105,25 @@
 			<a-text value="Click to return to Parent Page" color="black" baseline="bottom" align="center" width="3"
 			position="0 0.1 0" wrap-count="60"></a-text>
 			<a-link href="{{ parent.url }}" title="Back to Parent Page" 
-			image="#parent_main_image" on="click"
+			image="#parent_equirectangular_image" on="click"
 			position="0 0.75 0.01" scale="0.5 0.5 0.5"></a-link>
 			{% endif %}
 			{% if prev %}
 			<a-text value="Previous Page" color="black" baseline="top" align="center" width="3"
 			position="-0.75 -0.1 0" wrap-count="60"></a-text>
 			<a-link href="{{ prev.url }}" title="Previous Page" 
-			image="#prev_main_image" on="click"
+			image="#prev_equirectangular_image" on="click"
 			position="-0.75 -0.75 0.01" scale="0.5 0.5 0.5"></a-link>
 			{% endif %}
 			{% if next %}
 			<a-text value="Next Page" color="black" baseline="top" align="center" width="3"
 			position="0.75 -0.1 0" wrap-count="60"></a-text>
 			<a-link href="{{ next.url }}" title="Next Page" 
-			image="#next_main_image" on="click"
+			image="#next_equirectangular_image" on="click"
 			position="0.75 -0.75 0.01" scale="0.5 0.5 0.5"></a-link>
 			{% endif %}
 			{% endwith %}
 		</a-entity>
-  </a-entity>
-
-  <a-entity id="wall-left-ent"
-    position="-2 0 0"
-    rotation="0 90 0">
-	{% with color=page.color %}
-	{% image page.main_image fill-1000x1000 as temp_image %}
-      <a-plane id="wall-left" position="0 1.5 0"
-      width="4" height="3" src="#{{ temp_image.alt }}" color="{{ color|random }}">
-      </a-plane>
-	{% endwith %}
   </a-entity>
 
 {% endblock %}

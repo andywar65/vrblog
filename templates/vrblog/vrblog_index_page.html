@@ -5,17 +5,12 @@
 {% block body_class %}template-vrblogindexpage{% endblock %}
 
 {% block content %}
-	{% with page.main_image as main_image %}
-        {% if main_image %}
-          {% image main_image fill-1024x768 as temp_image %}
-		  <img id="{{ temp_image.alt }}" src="{{ temp_image.url }}">
-        {% endif %}
-      {% endwith %}
+	
 	{% for post in blogpages %}
     {% with post=post.specific %}
-	{% with post.main_image as main_image %}
-        {% if main_image %}
-          {% image main_image fill-1024x768 as temp_image %}
+	{% with post.equirectangular_image as equirectangular_image %}
+        {% if equirectangular_image %}
+          {% image equirectangular_image original as temp_image %}
 		  <img id="{{ temp_image.alt }}" src="{{ temp_image.url }}">
         {% endif %}
       {% endwith %}
@@ -71,7 +66,7 @@
 	{% with link_sizes=page.link_sizes link_position=page.link_position %}
 		{% if link_sizes %}
 		{% for position, item in link_position.items %}
-			{% image item.specific.main_image fill-1024x768 as temp_image %}
+			{% image item.specific.equirectangular_image fill-1024x768 as temp_image %}
 				<a-entity id="wall-right-ent-{{ temp_image.alt }}"
 					position="{{ position }} 0 0">
 						<a-plane id="wall-right-{{ temp_image.alt }}" position="{{ link_sizes.half }} 1.5 0"
@@ -108,33 +103,26 @@
 			<a-text value="Click to return to Parent Page" color="black" baseline="bottom" align="center" width="3"
 			position="0 0.1 0" wrap-count="60"></a-text>
 			<a-link href="{{ parent.url }}" title="" 
-			image="#parent_main_image" on="click"
+			image="#parent_equirectangular_image" on="click"
 			position="0 0.75 0.01" scale="0.5 0.5 0.5"></a-link>
 			{% endif %}
 			{% if prev %}
 			<a-text value="Previous Page" color="black" baseline="top" align="center" width="3"
 			position="-0.75 -0.1 0" wrap-count="60"></a-text>
 			<a-link href="{{ prev.url }}" title="" 
-			image="#prev_main_image" on="click"
+			image="#prev_equirectangular_image" on="click"
 			position="-0.75 -0.75 0.01" scale="0.5 0.5 0.5"></a-link>
 			{% endif %}
 			{% if next %}
 			<a-text value="Next Page" color="black" baseline="top" align="center" width="3"
 			position="0.75 -0.1 0" wrap-count="60"></a-text>
 			<a-link href="{{ next.url }}" title="" 
-			image="#next_main_image" on="click"
+			image="#next_equirectangular_image" on="click"
 			position="0.75 -0.75 0.01" scale="0.5 0.5 0.5"></a-link>
 			{% endif %}
 			{% endwith %}
 		</a-entity>
   </a-entity>
-  <a-entity id="wall-left-ent"
-    position="-2 0 0"
-    rotation="0 90 0">
-	{% image page.main_image fill-1024x768 as temp_image %}
-      <a-plane id="wall-left" position="0 1.5 0"
-      width="4" height="3" src="#{{ temp_image.alt }}">
-      </a-plane>
-  </a-entity>
+  
 </a-entity>
 {% endblock %}

@@ -14,6 +14,13 @@ from wagtail.wagtailsnippets.models import register_snippet
 
 class VrblogIndexPage(Page):
     intro = models.CharField(max_length=250)
+    equirectangular_image = models.ForeignKey(
+        'wagtailimages.Image', 
+        null=True,
+        blank=True,
+        on_delete = models.SET_NULL, 
+        related_name = '+',
+        )
 
     def get_context(self, request):
         #Update context to include only published posts, in reverse order
@@ -21,13 +28,6 @@ class VrblogIndexPage(Page):
         blogpages = self.get_children().live().order_by('-first_published_at')
         context['blogpages'] = blogpages
         return context
-
-    def main_image(self):
-        gallery_item = self.index_gallery_images.first()
-        if gallery_item:
-            return gallery_item.image
-        else:
-            return None
 
     def link_sizes(self):
         link_items = self.get_children().live().count()
@@ -56,7 +56,7 @@ class VrblogIndexPage(Page):
 
     content_panels = Page.content_panels + [
         FieldPanel('intro', classname="full"),
-        InlinePanel('index_gallery_images', label="Main image", max_num=1),
+        ImageChooserPanel('equirectangular_image'),
     ]
 
 class VrblogPageTag(TaggedItemBase):
@@ -65,16 +65,15 @@ class VrblogPageTag(TaggedItemBase):
 class VrblogPage(Page):
     date = models.DateField("Post date")
     intro = models.CharField(max_length=250)
-    #body = models.TextField(blank=True)
+    equirectangular_image = models.ForeignKey(
+        'wagtailimages.Image', 
+        null=True,
+        blank=True,
+        on_delete = models.SET_NULL, 
+        related_name = '+',
+        )
     tags = ClusterTaggableManager(through=VrblogPageTag, blank=True)
     categories = ParentalManyToManyField('vrblog.VrblogCategory', blank=True)
-
-    def main_image(self):
-        gallery_item = self.gallery_images.first()
-        if gallery_item:
-            return gallery_item.image
-        else:
-            return None
 
     def gallery_sizes(self):
         gallery_items = self.gallery_images.count()
@@ -141,8 +140,8 @@ class VrblogPage(Page):
             FieldPanel('categories', widget=forms.CheckboxSelectMultiple),
         ], heading="VRblog Information"),
         FieldPanel('intro'),
-        #FieldPanel('body', classname="full"),
-        InlinePanel('gallery_images', label="Text + Gallery images",),
+        ImageChooserPanel('equirectangular_image'),
+        InlinePanel('gallery_images', label="Text + Image Gallery",),
     ]
 
 class VrblogPageGalleryImage(Orderable):
