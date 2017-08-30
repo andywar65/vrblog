@@ -32,10 +32,10 @@ class VrblogIndexPage(Page):
     def link_sizes(self):
         link_items = self.get_children().live().count()
         if link_items:
-            link_sizes = {'module': 3/link_items, 
-                'half': 3/link_items*0.5,
-                'radius': 3/link_items*.25,
-                'center': 3/link_items*0.75,}
+            link_sizes = {'module': 4/link_items, 
+                'half': 4/link_items*0.5,
+                'radius': 4/link_items*.25,
+                'center': 4/link_items*0.75,}
             return link_sizes
         else:
             return None
@@ -43,7 +43,7 @@ class VrblogIndexPage(Page):
     def link_position(self):
         live_children = self.get_children().live()
         if live_children:
-            module = 3/live_children.count()
+            module = 4/live_children.count()
             link_position = {}
             x = 0
             blogpages = live_children.order_by('-first_published_at')
@@ -79,9 +79,10 @@ class VrblogPage(Page):
     def gallery_sizes(self):
         gallery_items = self.gallery_images.count()
         if gallery_items:
-            gallery_sizes = {'module': 3/gallery_items, 
-                'half': 3/gallery_items/2,
-                'center': 3/gallery_items*0.75,}
+            gallery_sizes = {'module': 4/gallery_items, 
+                'half': 4/gallery_items/2,
+                'height': 4/gallery_items/2*0.75,
+                'center': 4/gallery_items*0.75,}
             return gallery_sizes
         else:
             return None
@@ -117,7 +118,7 @@ class VrblogPage(Page):
     def gallery_position(self):
         gallery_count = self.gallery_images.count()
         if gallery_count:
-            module = 3/gallery_count
+            module = 4/gallery_count
             gallery_position = {}
             x = 0
             gallery_items = self.gallery_images.all()

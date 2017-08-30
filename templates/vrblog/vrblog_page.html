@@ -9,7 +9,7 @@
 	{% with gallery_items=page.gallery_images.all %}
 		{% if gallery_items %}
 			{% for item in gallery_items %}
-				{% image item.image fill-1000x1000 as temp_image %}
+				{% image item.image fill-1024x768 as temp_image %}
 				<img id="{{ temp_image.alt }}" src="{{ temp_image.url }}">
 			{% endfor %}
 		{% endif %}
@@ -20,38 +20,38 @@
   rotation="0 0 0">
 
   <a-entity id="floor"
-  geometry="primitive: plane; width: 3; height: 3"
+  geometry="primitive: plane; width: 4; height: 4"
   position="0 0 0"
   rotation="-90 0 0"
   material="color: #ffffff; src: #parquet; repeat: 1 1">
   </a-entity>
 
   <a-entity id="ceiling"
-  geometry="primitive: plane; width: 3; height: 3"
+  geometry="primitive: plane; width: 4; height: 4"
   position="0 3 0"
   rotation="90 0 0"
   material="color: #666666; src: ; repeat: 1 1">
   </a-entity>
 
   <a-entity id="wall-front-ent"
-    position="0 0 -1.5"
+    position="0 0 -2"
     rotation="0 0 0">
       <a-entity id="wall-front-title"
-        geometry="primitive: plane; width: 3; height: 1.35"
+        geometry="primitive: plane; width: 4; height: 1.35"
         position="0 2.325 0"
         material="color: #ffffff; src: ; repeat: 1 1">
 		<a-text value="{{ page.title }}" color="black" baseline="bottom" align="center" width="3"
 		position="0 -0.64 0" wrap-count="30"></a-text>
       </a-entity>
 	  <a-entity id="wall-front-date"
-        geometry="primitive: plane; width: 3; height: 0.1"
+        geometry="primitive: plane; width: 4; height: 0.1"
         position="0 1.6 0"
         material="color: #333333; src: ; repeat: 1 1">
 		<a-text value="Published {{ page.date }}" color="white" baseline="center" align="left" width="3"
 		position="-1.5 0 0" wrap-count="80"></a-text>
       </a-entity>
       <a-entity id="wall-front-intro"
-        geometry="primitive: plane; width: 3; height: 1.55"
+        geometry="primitive: plane; width: 4; height: 1.55"
         position="0 0.775 0"
         material="color: #ffffff; src: ; repeat: 1 1">
 		<a-text value="{{ page.intro }}" color="black" baseline="top" align="left" width="3"
@@ -66,13 +66,13 @@
   </a-entity>
   
   <a-entity id="wall-right-ent"
-    position="1.5 0 -1.5"
+    position="2 0 -2"
     rotation="0 -90 0">
   
 	{% with gallery_sizes=page.gallery_sizes gallery_position=page.gallery_position %}
 		{% if gallery_sizes %}
 		{% for position, item in gallery_position.items %}
-			{% image item.image fill-1000x1000 as temp_image %}
+			{% image item.image fill-1024x768 as temp_image %}
 				<a-entity id="wall-right-ent-{{ temp_image.alt }}"
 					position="{{ position }} 0 0">
 						<a-plane id="wall-right-{{ temp_image.alt }}" position="{{ gallery_sizes.half }} 1.5 0"
@@ -81,23 +81,23 @@
 							position="0 0.1 0" wrap-count="30"></a-text>
 						</a-plane>
 						<a-plane id="wall-right-image-{{ temp_image.alt }}" position="{{ gallery_sizes.center }} 1.6 0.001"
-							width="{{ gallery_sizes.half }}" height="{{ gallery_sizes.half }}" src="#{{ temp_image.alt }}">
+							width="{{ gallery_sizes.half }}" height="{{ gallery_sizes.height }}" src="#{{ temp_image.alt }}">
 						</a-plane>
 				</a-entity>
 		{% endfor %}
 		{% else %}
-			<a-plane id="wall-right" position="1.5 1.5 0"
-							width="3" height="3" >
+			<a-plane id="wall-right" position="2 1.5 0"
+							width="4" height="3" >
 			</a-plane>
 		{% endif %}
 	{% endwith %}
 	
 	</a-entity>
   <a-entity id="wall-back-ent"
-    position="0 0 1.5"
+    position="0 0 2"
     rotation="0 180 0">
 		<a-entity id="wall-back-link"
-			geometry="primitive: plane; width: 3; height: 3"
+			geometry="primitive: plane; width: 4; height: 3"
 			position="0 1.5 0"
 			material="color: #dddddd; src: ; repeat: 1 1">
 			{% with parent=page.get_parent prev=page.get_prev_siblings.live.first next=page.get_next_siblings.live.first %}
@@ -127,12 +127,12 @@
   </a-entity>
 
   <a-entity id="wall-left-ent"
-    position="-1.5 0 0"
+    position="-2 0 0"
     rotation="0 90 0">
 	{% with color=page.color %}
 	{% image page.main_image fill-1000x1000 as temp_image %}
       <a-plane id="wall-left" position="0 1.5 0"
-      width="3" height="3" src="#{{ temp_image.alt }}" color="{{ color|random }}">
+      width="4" height="3" src="#{{ temp_image.alt }}" color="{{ color|random }}">
       </a-plane>
 	{% endwith %}
   </a-entity>
