@@ -1,15 +1,39 @@
-{% extends "base.html" %}
 {% load static wagtailuserbar %}
 {% load wagtailcore_tags wagtailimages_tags %}
 
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>
+            {% block title %}
+                {% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %}
+            {% endblock %}
+            {% block title_suffix %}
+                {% with self.get_site.site_name as site_name %}
+                    {% if site_name %}- {{ site_name }}{% endif %}
+                {% endwith %}
+            {% endblock %}
+        </title>
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        {# Global stylesheets #}
+         <link rel="stylesheet" type="text/css" href="{% static 'css/my_site.css' %}"> 
+        {# Global VR script #}
+        <script type="text/javascript" src="{% static 'js/aframe.min.js' %}"></script>
 
         {% block extra_css %}
-            <script type="text/javascript" src="{% static 'js/aframe.min.js' %}"></script>
+            {# Override this in templates to add extra stylesheets #}
         {% endblock %}
+    </head>
 
-{% block body_class %}template-vrblogbase{% endblock %}
-
-{% block content %}
+    <body class="{% block body_class %}{% endblock %}">
+      {% wagtailuserbar %}
         <a-scene style="width: 100%; height: 768px" embedded>
           <a-assets>
 			{% with equirectangular_image=page.equirectangular_image %}
@@ -46,7 +70,7 @@
 			{% endif %}
 			
 			{% endwith %}
-            {% block vrblogcontent %}{% endblock %}
+            {% block content %}{% endblock %}
 			
 			<a-entity id="structure" shadow="receive: true; cast: true">
 			<a-entity id="top-slab" geometry="primitive: box; width: 4.4; height: 0.2; depth: 4.4" 
@@ -74,4 +98,12 @@
                   </a-camera>
             </a-entity>
         </a-scene>
-{% endblock %}
+
+        {# Global javascript #}
+        {# <script type="text/javascript" src="{% static 'js/my_site.js' %}"></script> #}
+
+        {% block extra_js %}
+            {# Override this in templates to add extra javascript #}
+        {% endblock %}
+    </body>
+</html>

@@ -20,3 +20,5 @@ category and tag template tags. On the right an image gallery alternated with te
 On the left there is no wall, but a window to an equirectangular image. 
 On the back wall are three link targets to navigate to the parent, previous and 
 next pages.
+
+The rooms are enclosed in a four pillar structure. Shadows are cast.
