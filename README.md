@@ -1,6 +1,7 @@
 # VRblog
 A django/wagtail app for a Virtual Reality Blog using A-Frame.
 A-Frame is a JavaScript library that lets you embed VR into HTML tags!
+The repository is archived due to a security issue in Wagtail.
 
 In a first phase I followed Wagtail tutorial for setting up a blog app, then I
 started implementing the VR part.
